@@ -1,0 +1,53 @@
+<main class="py-5">
+    <div class="container pt-3">
+        <div class="card mb-3" style="max-width: 900px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img [src]="product.image" class="card-img-top" alt="product-thumbnail" />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                    <h1 class="card-title">{{ product.title }}</h1>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text"><small class="text-muted">{{ product.sku }}</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="pharmacies py-5">
+            <div *ngIf="product.pharmacies?.data?.length > 0;else NOTDISTERBUTED">
+                <h2>Exists in these pharmacies ({{ product.pharmacies.total }})</h2>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let pharmacy of product.pharmacies.data | paginate: {
+                        id: 'pharmacy',
+                        itemsPerPage: product.pharmacies.per_page,
+                        currentPage: product.pharmacies.current_page,
+                        totalItems: product.pharmacies.total }">
+                        <th scope="row">#</th>
+                        <td>{{ pharmacy.name }}</td>
+                        <td>{{ pharmacy.address }}</td>
+                        <td>{{ pharmacy.pivot.price }}</td>
+                        <td>{{ pharmacy.pivot.quantity }}</td>
+                      </tr>
+                    </tbody>
+                </table>
+                <div class="pt-3 text-center w-100">
+                    <pagination-controls id="pharmacy" (pageChange)="pharmacyProductPaginate($event)"></pagination-controls>
+                </div>
+            </div>
+            <ng-template #NOTDISTERBUTED>
+                <h2>Don't exist in any pharmacy</h2>
+            </ng-template>
+        </div>
+    </div>
+</main>

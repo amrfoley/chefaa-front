@@ -1,0 +1,58 @@
+<main>
+    <div class="container">
+        <div class="search py-5">
+            <form (ngSubmit)="searchProducts()">
+                <input type="search" 
+                    [(ngModel)]="search" 
+                    placeholder="Search products..." 
+                    name="search"
+                    class="form-control w-100"
+                />
+            </form>
+        </div>
+        <div class="product-cards all-cards pb-5" *ngIf="searchedProducts; else: homePage">
+            <div class="single-card" *ngFor="let singleProduct of searchedProducts | paginate: {
+                id: 'searchedProducts',
+                itemsPerPage: searchedProductsPerPage,
+                currentPage: searchedProductsCurrentPage,
+                totalItems: searchedProductsTotalPages }">
+                <product-card [product]="singleProduct"></product-card>
+            </div>
+            <div class="pt-3 text-center w-100">
+                <pagination-controls id="searchedProducts" (pageChange)="searchedProductsPaginate($event)"></pagination-controls>
+            </div>
+        </div>
+        <ng-template #homePage>
+            <section class="products">
+                <h1 class="pb-3">Chefaa Products</h1>
+                <div class="product-cards all-cards">
+                    <div class="single-card" *ngFor="let singleProduct of products | paginate: {
+                        id: 'products',
+                        itemsPerPage: productsPerPage,
+                        currentPage: productsCurrentPage,
+                        totalItems: productsTotalPages }">
+                        <product-card [product]="singleProduct"></product-card>
+                    </div>
+                    <div class="pt-3 text-center w-100">
+                        <pagination-controls id="products" (pageChange)="productsPaginate($event)"></pagination-controls>
+                    </div>
+                </div>
+            </section>
+            <div class="pharmacies py-4">
+                <h2 class="pb-3">Chefaa Pharmacies</h2>
+                <div class="pharmacy-cards all-cards">
+                    <div class="single-card" *ngFor="let singlePharmacy of pharmacies | paginate: {
+                        id: 'pharmacies',
+                        itemsPerPage: pharmaciesPerPage,
+                        currentPage: pharmaciesCurrentPage,
+                        totalItems: pharmaciesTotalPages }">
+                        <pharmacy-card [pharmacy]="singlePharmacy"></pharmacy-card>
+                    </div>
+                    <div class="pt-3 text-center w-100">
+                        <pagination-controls id="pharmacies" (pageChange)="pharmaciesPaginate($event)"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</main>

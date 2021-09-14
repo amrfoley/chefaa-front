@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+.form-control {
+    outline: none;
+}
+// #site {
+//     min-height: 100vh;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+// }
+.all-cards {
+    margin: -10px;
+    display: flex;
+    flex-wrap: wrap;
+    .single-card {
+        padding: 5px;
+        width: 220px;       
+        .card-data {            
+            text-decoration: none;
+            box-shadow: 0 0 5px -1px rgb(196 196 196 / 70%);
+            display: block;     
+            &.pharmacy {
+                img {
+                    height: 155px;
+                }
+            }       
+            img {
+                height: 210px;
+                width: 100%;
+                padding: 5px;
+            }
+            .info {
+                color: #303033;
+                padding: 5px;
+                .card-title {
+                    font-size: 18px;
+                    height: 60px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .card-desc {
+                    font-size: 16px;
+                    height: 120px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+            &:hover {
+                img {
+                    padding: 0;
+                    transition: all 0.2s;
+                    -ms-transition: all 0.2s;
+                    -moz-transition: all 0.2s;
+                }
+            }
+        }
+    }
+}

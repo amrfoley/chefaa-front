@@ -1,0 +1,10 @@
+<a class="product card-data" routerLink="/products/{{product.id}}">
+    <div class="thumbnail">
+        <img [src]="product.image + '?id=' + product.id" alt="product-thumbnail" />
+    </div>
+    <div class="info pt-3">
+        <h3 class="card-title">{{ product.title }}</h3>
+        <p class="card-desc mb-0">{{ product.description }}</p>
+        <small class="py-2">SKU: {{ product.sku }}</small>
+    </div>
+</a>

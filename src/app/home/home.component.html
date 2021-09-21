@@ -9,6 +9,9 @@
                     class="form-control w-100"
                 />
             </form>
+            <div class="alert alert-danger my-2" *ngIf="searchErrorMsg">
+                <h4>{{ searchErrorMsg }}</h4>
+            </div>
         </div>
         <div class="product-cards all-cards pb-5" *ngIf="searchedProducts; else: homePage">
             <div class="single-card" *ngFor="let singleProduct of searchedProducts | paginate: {

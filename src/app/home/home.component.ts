@@ -11,6 +11,7 @@ import { HttpProviderService } from '../services/http-provider.service';
 export class HomeComponent implements OnInit {
 
   search: string = '';
+  searchErrorMsg: string = '';
   searchedProducts: Product[];
   searchedProductsPerPage: number;
   searchedProductsCurrentPage: number;
@@ -71,6 +72,7 @@ export class HomeComponent implements OnInit {
   {
     if(this.search === '') return;
 
+    this.searchErrorMsg = '';
     let products: any = await this.http.get('products/search', {search: this.search, page});
 
     if(products.data !== undefined && products.data.length > 0)
@@ -79,6 +81,8 @@ export class HomeComponent implements OnInit {
       this.searchedProductsPerPage = products.per_page;
       this.searchedProductsCurrentPage = products.current_page;
       this.searchedProductsTotalPages = products.total;
+    } else {
+      this.searchErrorMsg = 'No Products Found';
     }
   }
 

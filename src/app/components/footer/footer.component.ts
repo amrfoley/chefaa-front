@@ -8,7 +8,7 @@ import { environment } from "../../../environments/environment";
 })
 export class FooterComponent implements OnInit {
 
-  logoURL = environment.storage + 'images/logo.png';
+  logoURL = environment.origin + 'images/logo.png';
 
   constructor() { }
 
